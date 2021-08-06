@@ -1,0 +1,43 @@
+@import 'commons';
+
+.message {
+    text-align: center;
+    margin: 50px 20px;
+
+    .title {
+        font-size: 24px;
+    }
+
+    .sub-title {
+        font-size: 14px;
+        margin-top: 20px;
+
+        .divOutputPath {
+            button {
+                margin-right: 20px;
+            }
+        }
+    }
+
+    i {
+        font-size: 80px;
+        color: $ERROR;
+    }
+
+    .errorMsg {
+        max-height: 200px;
+        max-width: 500;
+        overflow: auto;
+        margin: auto;
+        text-align: left;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        .errorTitle{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .errorDetail{
+            margin-top: 20px;
+        }
+    }
+}

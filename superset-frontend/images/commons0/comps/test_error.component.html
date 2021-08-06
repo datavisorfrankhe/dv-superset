@@ -1,0 +1,17 @@
+<div class='message'>
+    <i class="material-icons">sms_failed</i>
+    <br/> {{i18n.trans('FP_REPLAY_STATUS_FAILED')}}
+    <div class='errorMsg'>
+        <div *ngIf="replayTask.standardApiError.fpError">
+            <div class='errorTitle'>
+                {{replayTask.standardApiError.errorCode}} - {{i18n.trans(replayTask.standardApiError.statusCode)}}
+            </div>
+            <div class='errorDetail'>
+                {{replayTask.standardApiError.msg}}
+            </div>
+        </div>
+        <div *ngIf="!replayTask.standardApiError.fpError" >
+            {{replayTask.errorMsg}}
+        </div>
+    </div>
+</div>

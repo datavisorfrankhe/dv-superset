@@ -1,0 +1,21 @@
+@import 'commons';
+
+.validateResult {
+    //display: flex;
+    visibility: hidden;
+    height: 7px;
+
+    i {
+        color: $Y005;
+    }
+
+    .contents {
+        margin-top: 3px;
+        margin-left: 16px;
+    }
+
+    button {
+        margin-left: 10px;
+        margin-top: -4px;
+    }
+}

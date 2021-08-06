@@ -1,0 +1,35 @@
+<div class="selector-wrapper">
+    <div class="title">
+        {{i18n.trans("FP_V2_By_UI_SELEC_VERSION_TITLE")}}
+    </div>
+    <div class='version_selector'>
+        <dv-table *ngIf="config && data" [appId]="appId" [config]="config" [data]="data" (onSelectedRowChanged)="selectedRowChanged($event)" (onMoreOptionItemClicked)="onMoreOptionItemClicked($event)" [controlPanelConfig]="tableControlPanelConfig" (onCellClicked)="onCellClicked($event)"></dv-table>
+    </div>
+
+    <div *ngIf="versionToShow!==null" class="version_detail_header">
+        {{i18n.trans('FP_VERSIONS_POPUP_VERSION_HEADER', versionToShow)}}
+        <div class='actionButtons'>
+            <button *ngIf="type===_VERSIONTYPE.PACKAGE || type===_VERSIONTYPE.OPERATOR" mat-raised-button class="primary-hollow-button" (click)="view()">
+                {{ i18n.trans('VIEW')}}
+            </button>
+            <button *ngIf="deletable" mat-raised-button class="primary-hollow-button" (click)="edit()">
+                {{ i18n.trans('EDIT')}}
+            </button>
+        </div>
+        <div class='expander' (click)="versionDetailOpened=!versionDetailOpened">
+            <span class="material-icons">{{versionDetailOpened?'remove_circle_outline':'add_circle_outline'}}  </span>
+        </div>
+    </div>
+
+    <div class='version_detail_content' *ngIf='versionDetailOpened'>
+        <app-version-selector-detail-operator *ngIf="type===_VERSIONTYPE.OPERATOR" [generalFunction]="selectedEntity"></app-version-selector-detail-operator>
+        <app-version-selector-detail-featuredefinition *ngIf="type===_VERSIONTYPE.FEATURETEMPLATE" [featureDefinition]="selectedEntity"></app-version-selector-detail-featuredefinition>
+        <app-version-selector-detail-package *ngIf="type===_VERSIONTYPE.PACKAGE" [packageEntity]="selectedEntity"></app-version-selector-detail-package>
+    </div>
+
+    <div class='btnController'>
+        <button mat-raised-button color="primary" class="dvBtnPrimary" (click)="closeme()">
+            {{ i18n.trans('OK')}}
+        </button>
+    </div>
+</div>

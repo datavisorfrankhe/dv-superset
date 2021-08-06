@@ -1,0 +1,5 @@
+<button mat-button class="basicIconButton" (click)="import()" [disabled]="loadingStatus===1">
+    <mat-icon svgIcon="fp-import"></mat-icon>
+    <span>{{ loadingStatus===1?i18n.trans('IMPORTING'):i18n.trans('IMPORT') }}</span>
+</button>
+<dv-file-chooser></dv-file-chooser>

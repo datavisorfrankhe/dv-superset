@@ -1,0 +1,36 @@
+@import 'commons';
+
+.wrapper {
+    width: 1000px;
+    position: relative;
+
+    .addBtn {
+        position: absolute;
+        right: 0;
+        top: 350px;
+    }
+
+    .selectedRelationships {
+        margin-bottom: 20px;
+        .dsSelectedTitle {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .dsSelectedItemWrapper {
+            padding: 10px 20px;
+            width: 50%;
+            border: solid 1px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            position: relative;
+
+            .material-icons {
+                position: absolute;
+                right: 20px;
+                top: 8px;
+                cursor: pointer;
+            }
+        }
+    }
+}

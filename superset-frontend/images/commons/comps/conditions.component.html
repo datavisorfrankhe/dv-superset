@@ -1,0 +1,77 @@
+<div class="wrapper">
+    <div *ngIf="loaded" class="blockWrapperOuter">
+
+        <div class="blockWrapperInner">
+
+            <div *ngIf="!isLeafObject(conditions)" class="innerContent">
+                <div *ngFor="let child of conditions.children; first as first; last as last">
+                    <div *ngIf="isLeafObject(child)" class='leafWrapper'>
+                        <app-dv-conditions
+                        [viewOnly]="viewOnly"
+                        [conditions]="child"
+                        [totalLevels]="totalLevels" [currentLevel]="currentLevel"></app-dv-conditions>
+                    </div>
+                    <div *ngIf="!isLeafObject(child) && child.children.length>0" class="conditionBlock">
+                        <div *ngFor="let grandChild of child.children; first as first; last as last " class='blockWrapper'>
+                            <app-dv-conditions
+                            [viewOnly]="viewOnly"
+                            [conditions]="grandChild"
+                            [totalLevels]="totalLevels"
+                            [currentLevel]="currentLevel"></app-dv-conditions>
+                            <i class="material-icons removeLeafIcon" *ngIf="!viewOnly" (click)="removeSubChild(child, grandChild)" [matTooltip]="toolTipRemoveCondition">delete_forever</i>
+                            <div class='toggleBtnWrapper'>
+                                <dv-button-toggle [viewOnly]="viewOnly" *ngIf="child.children.length>1 && !last" [toggleOptions]="conditionsOptions" [defaultValue]="child.condition" (onToggleChange)="child.condition=$event"></dv-button-toggle>
+                            </div>
+                        </div>
+
+                        <button mat-button class="basicPrimaryButtonWithBorder btnAddCondition" *ngIf="canAdd && !viewOnly" (click)="child.addChild()">
+                            <mat-icon>add</mat-icon>
+                            {{i18n.trans('FP_VELOCITY_CREATE_ADD_CONDITION')}}
+                        </button>
+                        <i class="material-icons removeConditionBlockIcon"  *ngIf="!viewOnly" (click)="remove(conditions,child)" [matTooltip]="toolTipRemoveBlock" >delete</i>
+                    </div>
+                    <div class="conditionToggleWrapper" *ngIf="conditions.children.length>1 && !last">
+                        <div class='divider'></div>
+
+                        <dv-button-toggle
+                            [ngClass]="{'singleToggle': viewOnly}"
+                            [viewOnly]="viewOnly"
+                            [toggleOptions]="conditionsOptions"
+                            [defaultValue]="conditions.condition"
+                            (onToggleChange)="conditions.condition=$event"></dv-button-toggle>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isLeafObject(conditions)" class="conditionWrapper">
+                <app-dv-condition
+                [viewOnly]="viewOnly"
+                [condition]="conditions"></app-dv-condition>
+            </div>
+        </div>
+    </div>
+
+    <button
+        mat-button
+        class="basicPrimaryButton"
+        *ngIf="(!isLeafObject(conditions) && canAdd && !viewOnly) && currentLevel===1 && conditions.children.length===0; else addBlockBtn"
+        (click)="conditions.addChild()"
+        >
+        <mat-icon>add_circle_outline</mat-icon>
+        {{i18n.trans('FP_VELOCITY_CREATE_CLICK_ADD_CONDITION')}}
+    </button>
+
+    <ng-template #addBlockBtn>
+        <button
+            mat-button
+            class="basicPrimaryButtonWithBorder addBlockBtn"
+            *ngIf="!isLeafObject(conditions) && canAdd && !viewOnly"
+            (click)="conditions.addChild()">
+            <mat-icon>add</mat-icon>
+            {{i18n.trans('FP_VELOCITY_CREATE_ADD_BLOCK')}}
+        </button>
+    </ng-template>
+
+
+
+
+</div>

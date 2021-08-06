@@ -1,0 +1,52 @@
+@import "commons";
+
+.title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+        font-size: 20px;
+        color: $NOIR_TITLE;
+    }
+
+    .closeIcon {
+        cursor: pointer;
+    }
+}
+
+.mat-divider {
+    margin: 10px 0;
+}
+
+.contact-button {
+    color: $B;
+    position: absolute;
+    top: 87px;
+    right: 40px;
+    z-index: 100;
+}
+
+.back-button {
+    color: white;
+    background-color: $B;
+    margin-top: 20px;
+}
+
+dv-table::ng-deep {
+    .tableHeaderHead {
+        padding-left: 0 !important;
+    }
+
+    .status-icon {
+        line-height: 18px;
+
+        &.ERROR {
+            color: #f95050 !important;
+        }
+
+        &.WARNING {
+            color: #fa9000 !important;
+        }
+    }
+}

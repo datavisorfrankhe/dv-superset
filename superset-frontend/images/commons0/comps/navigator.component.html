@@ -1,0 +1,16 @@
+<div class='navigator_wrapper' >
+     <ul>
+        <li *ngFor="let item of pathsToDisplay; index as i" (click)="goTo(item)">
+            <span class='itemWrapper' [ngClass]="{'not-last': i < pathsToDisplay.length - 1}">
+                <span class='iconWrapper' *ngIf="item.icon" >
+                    <i class="material-icons">
+                        {{item.icon}}
+                    </i>
+                </span>
+                <span>
+                    {{item.title}}
+                </span>
+            </span>
+        </li>
+    </ul>
+</div>

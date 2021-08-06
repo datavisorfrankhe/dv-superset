@@ -1,0 +1,84 @@
+@import "commons.scss";
+
+:host-context(.light) {
+    .reminderWrapper{
+        border: solid 1px $NOIR017;
+        background-color: $GR007;
+    }
+}
+
+
+.title{
+    font-size: 20px;
+}
+.rt_toggler{
+    margin-bottom: 20px;
+}
+.rtFileError{
+    height: 30px;
+}
+
+.subtitle{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    .material-icons{
+        color: $NOIR017;
+        margin-right: 20px;
+    }
+}
+
+.dv-simple-list{
+    margin-top: 00px;
+    width: 800px;
+}
+.dataset-select{
+    width: 300px;
+    display: flex;
+    align-items: center;
+    .wrapper{
+        margin-right: 20px;
+        display: inline-flex;
+        auto-complete{
+            width: 250px;
+        }
+    }
+    .wrapper_wider{
+        margin-right: 20px;
+        display: inline-flex;
+        auto-complete{
+            width: 350px;
+        }
+    }
+}
+.reminderWrapper{
+
+    width: 760px;
+    border: solid 1px $NOIR017;
+    background-color: #232E4C;
+    padding: 10px 20px;
+    display: inline-block;
+    border-radius: 5px;
+    .dataset-status-reminder{
+        display: flex;
+        align-items: center;
+        .done{
+            color: $GREEN;
+        }
+        .warning{
+            color: $WARNING;
+        }
+        .material-icons{
+            margin-right: 20px;
+        }
+    }
+    .reminder-link{
+        float: right;
+        .checkMore{
+            cursor: pointer;
+            color: $B;
+            margin-left: 20px;
+        }
+    }
+}

@@ -1,0 +1,56 @@
+<div class="condition_wrapper" *ngIf="condition && !viewOnly">
+
+        <div class="attributes">
+            <auto-complete
+            defaultFontSize=12
+            [defaultValue]="condition.attribute && condition.attribute.name"
+            [placeholder]="placeholderAddAttribute"
+            [data]="features"
+            (onChange)="addCondition_att($event)"></auto-complete>
+        </div>
+        <div class="operator">
+            <auto-complete
+            [disabled]="!condition.attribute"
+            defaultFontSize=12
+            *ngIf="condition.availableOperators"
+            [defaultValue]="condition.operator && condition.operator.name"
+            [placeholder]="placeholderAddOperator"
+            [data]="condition.availableOperators"
+            (onChange)="addCondition_ope($event)"></auto-complete>
+        </div>
+
+        <div class="value">
+            <dv-select
+            [disabled]="!condition.operator"
+            [defaultValue]="condition.valueType"
+            [placeholder]="placeholderOperaType"
+            [selectOptions]="paramTypes"
+            (selectionChange)="selParamType($event)"></dv-select>
+        </div>
+
+        <div class='cfx'></div>
+
+        <div class="result_values">
+            <auto-complete
+            defaultFontSize=12
+            *ngIf="condition.availableValueFeatures && condition.valueType=='Features'"
+            [defaultValue]="condition.value && condition.value.name"
+            [placeholder]="placeholderOperaType_Feature"
+            [data]="features"
+            (onChange)="selFeature($event)"></auto-complete>
+
+            <dv-mat-input *ngIf="condition.valueType === 'Constant Value'"
+            [defaultValue]="condition.value"
+            [placeholder]="placeholderOperaType_CONSTANT"
+            [type]="getType()" (onChange)="selConstantValue($event)"></dv-mat-input>
+        </div>
+        <div class="cfx"></div>
+        <div class='error' *ngIf="condition.error">{{ i18n.trans(condition.error) }}</div>
+</div>
+
+<div class="condition_wrapper view_only_content" *ngIf="condition && viewOnly">
+    {{condition.attribute.name}} {{condition.operator.name}}
+    <span *ngIf="condition.valueType=='Features'">{{condition.value.name}}</span>
+    <span *ngIf="condition.valueType === 'Constant Value'">"{{condition.value}}"</span>
+
+</div>

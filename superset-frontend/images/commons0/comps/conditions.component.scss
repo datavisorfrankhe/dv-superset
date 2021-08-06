@@ -1,0 +1,88 @@
+@import "commons.scss";
+
+.wrapper {
+    .blockWrapperOuter {
+        .blockWrapperInner {
+            .innerContent {
+                .conditionBlock {
+                    position: relative;
+                    border: $B003 2px solid;
+                    border-radius: 3px;
+
+                    .blockWrapper {
+                        position: relative;
+                        margin-top: 10px;
+
+                        .removeLeafIcon {
+                            position: absolute;
+                            right: 10px;
+                            top: 20px;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .btnAddCondition {
+                        margin-bottom: 10px;
+                        margin-left: 20px;
+                    }
+
+                    .removeConditionBlockIcon {
+                        position: absolute;
+                        right: 10px;
+                        bottom: 10px;
+                    }
+
+                    .toggleBtnWrapper {
+                        margin-left: 30px;
+                    }
+                }
+
+                .leafWrapper {
+                    position: relative;
+
+                    .removeLeafIcon {
+                        position: absolute;
+                        right: 0;
+                        top: 50px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .conditionToggleWrapper {
+                padding-top: 20px;
+                padding-bottom: 20px;
+                position: relative;
+
+                .divider {
+                    position: absolute;
+                    height: 100%;
+                    width: 2px;
+                    top: 0;
+                    left: 52px;
+                    display: inline-block;
+                    background-color: $B;
+                    display: inline-block;
+                }
+                .singleToggle{
+                    margin-left: 26px;
+                }
+            }
+        }
+    }
+
+    .addBlockBtn {
+        margin-top: 20px;
+    }
+
+    ::ng-deep {
+        .mat-button-toggle-group {
+            font-size: 10px;
+            border-radius: 8px;
+
+            .mat-button-toggle-label-content {
+                line-height: 24px;
+            }
+        }
+    }
+}

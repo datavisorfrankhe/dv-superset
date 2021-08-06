@@ -1,0 +1,33 @@
+@import 'commons';
+.navigator_wrapper {
+    margin-left: 70px;
+    ul {
+        list-style: none;
+        padding-left: 0px;
+        li {
+            display: inline;
+            .itemWrapper {
+                .iconWrapper {
+                    position: relative;
+                    width: 25px;
+                    height: 17px;
+                    display: inline-block;
+                    i {
+                        position: absolute;
+                    }
+                }
+
+            }
+            .not-last{
+                cursor: pointer;
+                color: $BL002;
+                &:after {
+                    font-family: Material Icons;
+                    font-size: 1.5em;
+                    content: "\E315";
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+@import 'commons';
+
+.wrapper{
+    position: relative;
+    .title{
+        font-size: 20px;
+        line-height: 24px;
+        color: $Y004;
+    }
+    .subtitle{
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .close{
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        cursor: pointer;
+    }
+    .tenantselector{
+        width: 80%;
+        margin-top: 20px;
+    }
+    .btnsWrapper{
+        margin-top: 250px;
+        float: right;
+    }
+    .error{
+        color: $ERROR;
+    }
+}

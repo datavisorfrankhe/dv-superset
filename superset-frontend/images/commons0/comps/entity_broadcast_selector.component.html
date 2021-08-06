@@ -1,0 +1,33 @@
+<div class='wrapper'>
+    <div class='title'>
+        {{i18n.trans('FP_BROADCAST_SELECTOR_TITLE', [type])}}
+    </div>
+    <div class='subtitle'>
+        {{i18n.trans('FP_BROADCAST_SELECTOR_SUBTITLE', [type])}}
+    </div>
+    <div class='close' (click)="cancel()">
+        <i class="material-icons">close</i>
+    </div>
+
+    <div *ngIf="tenants" class='tenantselector'>
+        <dv-select
+        [selectOptions]="tenants"
+        multiple="true"
+        advanced="true"
+        placeholder="{{i18n.trans('FP_BROADCAST_SELECTOR_PH')}}"
+        noSelectReminder="{{i18n.trans('FP_BROADCAST_SELECTOR_NO_PH')}}"
+        allSelectReminder='FP_BROADCAST_SELECTOR_ALL'
+        partSelectReminder='FP_BROADCAST_SELECTOR_PART'
+        (selectionChange)="selectedChanged($event)"
+        ></dv-select>
+    </div>
+    <div class="error" *ngIf="error">{{error}}</div>
+    <div class='btnsWrapper'>
+        <button mat-button class="basicButton" (click)="cancel()">
+            {{i18n.trans('CANCEL')}}
+        </button>
+        <button mat-button class="primaryButton" (click)="confirm()">
+            {{i18n.trans('FP_BROADCAST_SELECTOR_BTN_CONFIRM')}}
+        </button>
+    </div>
+</div>

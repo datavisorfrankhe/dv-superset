@@ -1,0 +1,137 @@
+@import 'commons';
+
+.nopadding {
+    padding-top: 15px !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.feature-preview {
+    padding-top: 50px;
+    padding-right: 20px;
+    padding-left: 50px;
+    position: relative;
+
+    .closeIcon {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    .title {
+        color: $NOIR_TITLE;
+        font-size: 24px;
+        padding-bottom: 20px;
+        border-bottom: solid 1px $NOIR014;
+        display: flex;
+        align-items: center;
+
+        .material-icons {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    }
+
+    .half {
+        width: 50%;
+        float: left;
+    }
+
+    .block {
+        padding-top: 20px;
+        min-height: 50px;
+
+        .subTitle {
+            color: $NOIR017;
+        }
+
+        .tagTitle {
+            margin-bottom: 20px;
+        }
+
+        .acc_item {
+            width: 45%;
+            margin-right: 10px;
+            float: left;
+
+            .content {
+                margin-top: 0;
+                margin-bottom: 10px;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+            }
+
+            .subTitle {
+                padding-bottom: 0;
+            }
+        }
+
+        .condition_item_wrapper {
+            display: inline-block;
+            width: 80%;
+            margin-top: 20px;
+
+            .conditon_item {
+                width: 20%;
+                float: left;
+                padding: 10px;
+            }
+        }
+        .disabled{
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        button {
+            margin-right: 10px;
+        }
+
+        &.noPadding {
+            padding-top: 0;
+        }
+    }
+
+    .content {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        padding-right: 10px;
+
+        .tag {
+            background: $B014;
+            padding: 5px 10px;
+            margin-right: 10px;
+            color: $GR009;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        li {
+            cursor: pointer;
+            color: $B;
+        }
+    }
+
+    .editorWrapper {
+        margin-top: 20px;
+        width: 100%;
+        height: 200px;
+    }
+
+    .seperator {
+        padding-bottom: 20px;
+        border-bottom: solid 1px $NOIR014;
+        clear: both;
+    }
+
+    .detail_title {
+        color: $NOIR017;
+        text-transform: uppercase;
+        padding-top: 20px;
+    }
+
+    .cfx {
+        clear: both;
+    }
+}

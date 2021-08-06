@@ -1,0 +1,15 @@
+@import "commons.scss";
+
+.wrapper {
+    height: 300px;
+    .codeEditor {
+        width: 100%;
+        height: 100px;
+    }
+    .higherCodeEditor{
+        height: 350px;
+    }
+    .paramWrapper{
+        margin-top: 20px;
+    }
+}

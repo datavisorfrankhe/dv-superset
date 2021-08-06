@@ -1,0 +1,37 @@
+@import "commons.scss";
+
+.condition_wrapper {
+    margin-left: 20px;
+
+    .attributes {
+        width: 35%;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .operator {
+        width: 35%;
+        float: left;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .value {
+        float: left;
+        width: 15%;
+        display: inline-block;
+    }
+
+    .result_values {
+        width: 80%;
+    }
+
+    .error {
+        color: $ERROR;
+        margin-bottom: 10px;
+    }
+}
+
+.view_only_content{
+    margin-bottom: 10px;
+}

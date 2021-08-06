@@ -1,0 +1,12 @@
+<div class='wrapper'>
+    <div *ngIf="generalFunction" class="codeEditor" [ngClass]="{'higherCodeEditor': generalFunction.isVelocity}">
+        <dv-code-editor [type]="generalFunction?generalFunction.scriptType:'JAVA'" [code]="generalFunction?generalFunction.script:''" [readOnly]="true">
+        </dv-code-editor>
+    </div>
+
+    <div class="paramWrapper" *ngIf="generalFunction && config!=null && data!=null">
+        <dv-table [appId]="appId" [config]="config" [data]="data">
+        </dv-table>
+    </div>
+
+</div>

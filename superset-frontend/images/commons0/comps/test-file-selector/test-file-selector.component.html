@@ -1,0 +1,84 @@
+<div *ngIf="loaded">
+     <div *ngIf="dataSets && dataSets.selectedDataSet; else noDataSet" class="test-file-selector-component">
+
+        <div class="rt_toggler" *ngIf="!onlyDataSet">
+            <mat-checkbox (change)="updateUsingRT($event)" [checked]="usingRT">
+                {{i18n.trans('FP_FEATURTESTING_FILESELECTOR_USING_RT')}}
+            </mat-checkbox>
+        </div>
+
+        <div class="title" *ngIf="!usingRT">
+            {{'FP_FEATURTESTING_FILESELECTOR_SELECTDS_TITLE' | i18n}}
+        </div>
+
+        <div *ngIf="!usingRT">
+            <div class="subtitle">
+                <span class="material-icons">info</span> {{i18n.trans('FP_REPLAY_DATASET_STATUS_REMINDER_TITLE')}}
+            </div>
+
+            <div class="dataset-select">
+                <span class='wrapper'>
+                    <auto-complete *ngIf="dataSetNameOptions"
+                        [defaultValue]="dataSets.selectedDataSet.name"
+                        [placeholder]="placeholderSelectDataset"
+                        [data]="dataSetNameOptions"
+                        (onChange)="selectDataSetId($event)"></auto-complete>
+
+                </span>
+                <span *ngIf="dataSetNameOptions && showSupplementDataSet"
+                    class='wrapper_wider'
+                    [dvTooltip]="i18n.trans('SELECT_HISTORY_DATASET_MSG')">
+                    <auto-complete
+                        [defaultValue]="dataSets.historicDataSet?dataSets.historicDataSet.name:''"
+                        [placeholder]="placeholderSelectDatasetSup"
+                        [data]="dataSetNameOptions"
+                        (onChange)="selectHistoricalDataSetId($event)"
+                        (onClear)="removeHistoricalDataSet()"></auto-complete>
+                </span>
+            </div>
+
+            <div class='reminderWrapper' *ngIf="dataSets.selectedDataSet.status!==_DATASETSTATUS.VALIDATED">
+                <div class="dataset-status-reminder">
+                    <span class="material-icons warning">
+                    warning
+                </span>
+                    <span class="content">
+                    {{selectedDataSetReminder}}
+                </span>
+                </div>
+
+                <div class='reminder-link'>
+                    <span class="checkMore" *ngIf="dataSets.selectedDataSet.status===_DATASETSTATUS.VALIDATED_WITH_WARNINGS" (click)="showValidateResult()"> {{i18n.trans('FP_REPLAY_DATASET_STATUS_REMINDER_VALIDATEDETAILS')}}
+                </span>
+                    <span class="checkMore" (click)="showDetail()"> {{i18n.trans('FP_REPLAY_DATASET_STATUS_REMINDER_CHECKDATATYPES')}}
+                </span>
+                </div>
+            </div>
+
+            <div class='dv-simple-list'>
+                <dv-simple-list [dataList]="dataSets.selectedDatasetFileList" (onChange)="onChange($event)" [defaultAllSelected]="true"></dv-simple-list>
+            </div>
+        </div>
+
+        <div *ngIf="usingRT">
+            <dv-period-selector [onlyDate]="true" (onPeriodUpdated)="periodUpdateForRT($event)" [defaultValue]="defaultPeriod" [periodOptions]="periodOptions"></dv-period-selector>
+
+            <div class='error rtFileError' *ngIf="rtFileList.length===0">
+                {{i18n.trans('FP_FEATURTESTING_FILESELECTOR_USING_RT_NO_FILES')}}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+        <ng-template #noDataSet>
+            <div class='error'>
+                {{i18n.trans('FP_TESTING_ERROR_MISSING_DATASET')}}
+            </div>
+        </ng-template>
+    </div>
+</div>
+<div *ngIf="!loaded">
+    <mat-spinner [diameter]="30"></mat-spinner>
+</div>

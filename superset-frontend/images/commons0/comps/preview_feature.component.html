@@ -1,0 +1,275 @@
+<div class='feature-preview' *ngIf="feature" [ngClass]="{'nopadding': displayMode=='simplified' }">
+
+    <div class='closeIcon' *ngIf="displayMode=='normal'">
+        <i class="material-icons" (click)='closeme()'>close</i>
+    </div>
+
+    <div class='title' *ngIf="displayMode=='simplified'">
+        <span class="material-icons" (click)="back()">
+            arrow_back
+        </span> {{ featureDefinition?i18n.trans('FP_PREVIEW_FEATURE_DEFINITION_TITLE'): i18n.trans('FP_PREVIEW_FEATURE_TITLE')}}
+    </div>
+
+    <div class='block half'>
+        <div class="subTitle">
+            {{'FP_PREVIEW_FEATURE_SUBTITLE_NAME'|i18n}}
+        </div>
+        <div class="content">
+            {{feature.name}}
+        </div>
+    </div>
+
+    <div class='block half'>
+        <div class="subTitle">
+            {{'FP_PREVIEW_FEATURE_SUBTITLE_DESCRIPTION'|i18n}}
+        </div>
+        <div class="content">
+            {{feature.getDescription(i18n.getLang())}}
+        </div>
+    </div>
+
+    <div class='block half'>
+        <div class="subTitle">
+            {{'FP_PREVIEW_FEATURE_SUBTITLE_RETURNTYPE'|i18n}}
+        </div>
+        <div class="content">
+            {{feature ? feature.returnType || feature.return_type : ''}}
+        </div>
+    </div>
+
+    <div class='block half' *ngIf="featureDefinition">
+        <div class="subTitle">
+            {{'FP_PREVIEW_FEATURE_SUBTITLE_VERSION'|i18n}}
+        </div>
+        <div class="content">
+            {{passedInFD.fullVersion}}
+        </div>
+    </div>
+<!--
+    <div class='block tags half' *ngIf="!featureDefinition && feature.tags">
+        <div class="subTitle tagTitle">
+            {{i18n.trans('FP_PREVIEW_FEATURE_SUBTITLE_TAG')}}
+        </div>
+        <div class="content" *ngIf="featureType==='velocity'">
+            <span class="tag" *ngFor="let tag of feature.tags">
+                {{tag}}
+            </span>
+        </div>
+        <div class="content" *ngIf="featureType==='coding' || featureType==='basic'">
+            <span class="tag" *ngFor="let tag of feature.tags">
+                {{tag.name}}
+            </span>
+        </div>
+    </div> -->
+
+    <div class='seperator'></div>
+
+    <div class='detail_title'>
+        {{'FP_PREVIEW_FEATURE_TITLE'|i18n}}
+    </div>
+    <div class='block' *ngIf="featureType==='coding' && feature">
+        <div class="subTitle">
+            {{'FP_PREVIEW_FEATURE_SUBTITLE_CODE'|i18n}}
+        </div>
+        <div class="content editorWrapper">
+            <dv-code-editor
+                [readOnly]="true"
+                [code]="feature.function.script || feature.script"
+                [type]="feature.scriptType && feature.scriptType.toLowerCase() || 'JAVA'"
+            ></dv-code-editor>
+        </div>
+    </div>
+    <div class='block' *ngIf="featureType==='system' && feature ">
+        <div class="subTitle">
+            {{'FP_PREVIEW_FEATURE_SUBTITLE_CODE'|i18n}}
+        </div>
+        <div class="content editorWrapper">
+            <dv-code-editor [code]="feature.script" [readOnly]="true"></dv-code-editor>
+        </div>
+    </div>
+    <div class='block' *ngIf="featureType!=='coding' && featureType!=='system' && feature && feature.script">
+        <div class="subTitle">
+            {{'FP_PREVIEW_FEATURE_SUBTITLE_CODE'|i18n}}
+        </div>
+        <div class="content editorWrapper">
+            <dv-code-editor [code]="feature.script" [readOnly]="true" type="JAVA"></dv-code-editor>
+        </div>
+    </div>
+
+
+    <div *ngIf="featureType=='basic'">
+        <div class='block half'>
+            <div class="subTitle">
+                {{'FP_PREVIEW_FEATURE_SUBTITLE_FNAME'|i18n}}
+            </div>
+            <div class="content">
+                {{feature.featureTemplate.name}}
+            </div>
+        </div>
+
+        <div class='block half'>
+            <div class="subTitle">
+                {{'FP_FUNCTION_LIST_TITLE_VERSION'|i18n}}
+            </div>
+            <div class="content">
+                {{feature.featureTemplate.version}}
+            </div>
+        </div>
+
+        <div class='block half'>
+            <div class="subTitle">
+                {{'FP_PREVIEW_FEATURE_SUBTITLE_RETURNTYPE'|i18n}}
+            </div>
+            <div class="content">
+                {{feature.featureTemplate.returnType}}
+            </div>
+        </div>
+
+        <div class='cfx'></div>
+
+        <div class='block' *ngFor="let argument of feature.arguments; index as i">
+            <div class="subTitle">
+                {{ ('FP_PREVIEW_FEATURE_SUBTITLE_PARAM'|i18n) + (i+1)}} :
+                <span *ngIf="feature.featureTemplate['templateArgs']">
+                {{feature.featureTemplate.templateArgs[i].name}}
+                </span>
+            </div>
+            <div class="content" *ngIf="typeOf(argument)==='object' && !isArray(argument) && argument.name && featureDefinition">
+                {{featureDefinition?(isDvTag(argument)? ('FP_FUNCTION_PARAM_FD_TAG'|i18n):'FP_CREATE_FT_FROM_FEATURE_TEMPLATE'|i18n):'FP_FUNCTION_PARAM_FEATURE'|i18n}}: {{argument.name}}
+            </div>
+            <div class="content" *ngIf="typeOf(argument)==='object' && !isArray(argument) && argument.argValue && featureDefinition">
+                {{argument.argType}}: {{argument.argValue}}
+            </div>
+
+            <!-- <div class="content" *ngIf="typeOf(argument)==='object' && !isArray(argument) && argument.name && !featureDefinition">
+                {{argument.name}}
+            </div> -->
+            <div class="content" *ngIf="typeOf(argument)==='object' && !isArray(argument) && argument.argValue && !featureDefinition">
+                {{argument.argType.substr(argument.argType.lastIndexOf('.')+1) }}: {{argument.argValue}}
+            </div>
+
+
+            <div class="content" *ngIf="typeOf(argument)==='object' && isArray(argument)">
+                {{'FP_FUNCTION_PARAM_LISTVALUES'|i18n}}: {{argument}}
+            </div>
+            <div class="content" *ngIf="typeOf(argument)!=='object' && !isArray(argument)">
+                {{'FP_FUNCTION_PARAM_CONST_VALUES'|i18n}}: {{argument}}
+            </div>
+        </div>
+    </div>
+
+    <div class='block' *ngIf="featureType=='velocity'">
+        <div class="subTitle">
+            {{'FP_PREVIEW_FEATURE_SUBTITLE_FNAME'|i18n}}
+        </div>
+        <div class="content">
+            {{feature.function}}
+        </div>
+    </div>
+
+    <div class='block' *ngIf="featureType=='velocity'">
+        <div class="subTitle">
+            {{'FP_FUNCTION_LIST_TITLE_VERSION'|i18n}}
+        </div>
+        <div class="content">
+            {{feature.version}}
+        </div>
+    </div>
+
+    <div class='block' *ngIf="featureType=='velocity'">
+        <div class='acc_item'>
+            <div class="subTitle">
+                {{'FP_PREVIEW_FEATURE_SUBTITLE_ACC_ENTY'|i18n}}
+            </div>
+            <div class="content" *ngIf="updatedAccumulatorObj || feature.accumulator && feature.accumulator.entity">
+                <span *ngIf="updatedAccumulatorObj">{{updatedAccumulatorObj.entity}}</span>
+                <span *ngIf="!updatedAccumulatorObj">{{feature.accumulator.entity}}</span>
+            </div>
+        </div>
+        <div class='acc_item'>
+            <div class="subTitle">
+                {{'FP_PREVIEW_FEATURE_SUBTITLE_ACC_TARGET'|i18n}}
+            </div>
+            <div class="content" *ngIf="updatedAccumulatorObj || feature.accumulator && feature.accumulator.target">
+                <span *ngIf="updatedAccumulatorObj">{{updatedAccumulatorObj.target}}</span>
+                <span *ngIf="!updatedAccumulatorObj">{{feature.accumulator.target}}</span>
+            </div>
+        </div>
+    </div>
+    <div class='cfx'></div>
+
+    <div class='block' *ngIf="featureType=='velocity'">
+        <div *ngIf="accumulatoConditions && !accumulatoConditions.isEmpty">
+            <div class="subTitle">
+                {{'FP_PREVIEW_FEATURE_SUBTITLE_ACC_CONDITIONS'|i18n}}
+            </div>
+            <div class='condition_item_wrapper disabled'>
+                <app-dv-conditions [viewOnly]="true" totalLevels=1 currentLevel=0 [conditions]="accumulatoConditions"></app-dv-conditions>
+            </div>
+        </div>
+        <div *ngIf="accumulatoConditions && accumulatoConditions.isEmpty">
+            <div class="subTitle">
+                {{'FP_PREVIEW_FEATURE_SUBTITLE_ACC_CONDITIONS'|i18n}}
+            </div>
+            <div>
+                {{'FP_PREVIEW_FEATURE_SUBTITLE_ACC_NO_CONDITIONS'|i18n}}
+            </div>
+        </div>
+        <div *ngIf="featureDefinition && featureDefinitionCondition">
+            <div class="subTitle">
+                {{'FP_PREVIEW_FEATURE_SUBTITLE_ACC_CONDITIONS'|i18n}}
+            </div>
+            <div class="condition_item_wrapper disabled">
+                <app-accumulator-condition-template-tree-node
+                    [viewOnly]="true"
+                    [conditionGroup]="featureDefinitionCondition"
+                    [level]="0"
+                ></app-accumulator-condition-template-tree-node>
+            </div>
+        </div>
+        <div *ngIf="!accumulatoConditions && !featureDefinition">
+            <mat-spinner diameter="25"></mat-spinner>
+        </div>
+    </div>
+
+    <div class='block' *ngIf="featureType=='velocity'">
+        <div class="subTitle">
+            {{'FP_PREVIEW_FEATURE_SUBTITLE_TIME_WINDOW'|i18n}}
+        </div>
+        <div class="content">
+            <div>
+                {{'TIME_WINDOW_LENGTH'|i18n}}: {{feature.getTimeWindowLengthStr(i18n)}}
+            </div>
+            <div>
+                {{'OFFSET_LENGTH'|i18n}}: {{feature.getOffsetLengthStr(i18n)}}
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class='block' *ngIf="featureType!=='system' && feature.hasDependencies && feature.hasDependencies()">
+        <div class='subTitle'>
+            {{'FP_PREVIEW_FEATURE_DEPENDENCIES'|i18n:feature.featureDependencies.features.length}}
+        </div>
+        <div class='content'>
+            <ul>
+                <li *ngFor="let feature of feature.featureDependencies.features" (click)="editFeature(feature)">
+                    {{feature.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="block noPadding" *ngIf="displayMode=='normal' && featureType!=='system' && featureDefinition">
+        <button mat-raised-button color="primary" class="primaryButton" (click)='closeme()'>OK</button>
+        <button *ngIf="accessControlService.canEditTask(accessTasks.FEATURE_DEFINITION) && editable" mat-raised-button class="secondaryButton" (click)="edit()">{{'FP_EDIT'|i18n}}</button>
+    </div>
+
+    <div class="block noPadding" *ngIf="displayMode=='normal' && !featureDefinition">
+        <button mat-raised-button color="primary" class="primaryButton" (click)='closeme()'>OK</button>
+        <button mat-raised-button *ngIf="!preViewOnly" class="secondaryButton" (click)="test_me()">{{ 'FP_TEST'|i18n}}</button>
+        <button mat-raised-button class="secondaryButton" (click)="edit()" *ngIf="!preViewOnly && featureType!=='system'">{{'FP_EDIT'|i18n}}</button>
+    </div>
+
+</div>

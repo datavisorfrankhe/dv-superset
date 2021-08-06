@@ -1,0 +1,39 @@
+<div class='wrapper' *ngIf="dataSourceNames.length>0 && dataSets">
+<dv-simple-list-adv
+    [showMiddle]="false"
+    [leftDataList]="dataSourceNames"
+    [defaultLeftDataList] = "defaultDataSourceNames"
+    [leftSingleSelect]="true"
+    (leftOnChange)="dataSourceChanged($event)"
+    [rightDataList]="dataSetNames"
+    [defaultRightDataList]="defaultDataSetNames"
+    [rightSingleSelect]="false"
+    (rightOnChange)="dataSetChanged($event)"
+    [rightTitle]="i18n.trans('FP_DATASET_DATASOURCE_MATCHER_SEL_DATASETS')"
+    [leftTitle]="i18n.trans('FP_DATASET_DATASOURCE_MATCHER_SEL_DATASOURCE')">
+</dv-simple-list-adv>
+
+<button *ngIf="defaultDataSourceNames.length>0 &&  defaultDataSetNames.length>0"
+         mat-raised-button color="primary" class="dvBtnPrimary addBtn"
+         (click)="addRelationship()">{{i18n.trans('FP_DS_DSET_RELATIONSHIP_ADD')}}</button>
+
+<div class="selectedRelationships" *ngIf="dataSourceDatasetRelations.dataSourceDatasetRelations.length>0; else noRelationship">
+
+    <div class="dsSelectedTitle">
+        {{i18n.trans('FP_DATASET_DATASOURCE_DATASETS_SEL_REMINDER')}}
+    </div>
+
+    <div class='dsSelectedItemWrapper' *ngFor="let dataSourceDatasetRelation of dataSourceDatasetRelations.dataSourceDatasetRelations">
+        {{dataSourceDatasetRelation.dataSource.name}} - {{dataSourceDatasetRelation.dataset.name}}
+        <span class="material-icons" (click)="removeRelation(dataSourceDatasetRelation)">clear</span>
+    </div>
+
+</div>
+
+<ng-template #noRelationship>
+    <div>
+        {{i18n.trans('FP_DATASET_DATASOURCE_DATASETS_NONEEXIT')}}
+    </div>
+</ng-template>
+
+</div>

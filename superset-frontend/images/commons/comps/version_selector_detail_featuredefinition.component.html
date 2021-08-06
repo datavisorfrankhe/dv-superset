@@ -1,0 +1,132 @@
+<div class='feature-preview' *ngIf="feature">
+
+    <div *ngIf="featureType==='basic'">
+        <div class='block half'>
+            <div class="subTitle">
+                {{i18n.trans('FP_PREVIEW_FEATURE_SUBTITLE_FNAME')}}
+            </div>
+            <div class="content">
+                {{feature.featureTemplate.name}}
+            </div>
+        </div>
+
+        <div class='block half'>
+            <div class="subTitle">
+                {{i18n.trans('FP_FUNCTION_LIST_TITLE_VERSION')}}
+            </div>
+            <div class="content">
+                {{feature.featureTemplate.version}}
+            </div>
+        </div>
+
+        <div class='block half'>
+            <div class="subTitle">
+                {{i18n.trans('FP_PREVIEW_FEATURE_SUBTITLE_RETURNTYPE')}}
+            </div>
+            <div class="content">
+                {{feature.featureTemplate.returnType}}
+            </div>
+        </div>
+
+        <div class='cfx'></div>
+
+        <div class='block' *ngFor="let argument of feature.arguments; index as i">
+
+            <div class="subTitle">
+                {{i18n.trans('FP_PREVIEW_FEATURE_SUBTITLE_PARAM') + (i+1)}} :
+                <span *ngIf="feature.featureTemplate.templateArgs">
+                    {{feature.featureTemplate.templateArgs[i].name}}
+                </span>
+                <span *ngIf="feature.featureTemplate.operatorArgs">
+                    {{feature.featureTemplate.operatorArgs[i].name}}
+                </span>
+
+            </div>
+            <div class="content" *ngIf="typeOf(argument)==='object' && !isArray(argument)">
+                {{featureDefinition?i18n.trans('FP_FUNCTION_PARAM_FD_TAG'):i18n.trans('FP_FUNCTION_PARAM_FEATURE')}}: {{argument.name}}
+            </div>
+            <div class="content" *ngIf="typeOf(argument)==='object' && isArray(argument)">
+                {{i18n.trans('FP_FUNCTION_PARAM_LISTVALUES')}}: {{argument}}
+            </div>
+            <div class="content" *ngIf="typeOf(argument)!=='object' && !isArray(argument)">
+                {{i18n.trans('FP_FUNCTION_PARAM_CONST_VALUES')}}: {{argument}}
+            </div>
+
+        </div>
+    </div>
+
+    <div class='block' *ngIf="featureType=='velocity'">
+        <div class="subTitle">
+            {{i18n.trans('FP_PREVIEW_FEATURE_SUBTITLE_FNAME')}}
+        </div>
+        <div class="content">
+            {{feature.function}}
+        </div>
+    </div>
+
+
+    <div class='block' *ngIf="featureType=='velocity'">
+        <!-- <div class='acc_item'>
+            <div class="subTitle">
+                {{i18n.trans('FP_PREVIEW_FEATURE_SUBTITLE_ACC_NAME')}}
+            </div>
+            <div class="content" *ngIf="feature.accumulator && feature.accumulator.name">
+                {{feature.accumulator.name}}
+            </div>
+        </div> -->
+        <!-- <div class='acc_item'>
+            <div class="subTitle">
+                {{i18n.trans('FP_PREVIEW_FEATURE_SUBTITLE_ACC_DESC')}}
+            </div>
+            <div class="content" *ngIf="feature.accumulator && feature.accumulator.description">
+                {{feature.accumulator.description}}
+            </div>
+        </div> -->
+        <div class='acc_item'>
+            <div class="subTitle">
+                {{i18n.trans('FP_PREVIEW_FEATURE_SUBTITLE_ACC_ENTY')}}
+            </div>
+            <div class="content" *ngIf="feature.accumulator && feature.accumulator.entity">
+                {{feature.accumulator.entity}}
+            </div>
+        </div>
+        <div class='acc_item'>
+            <div class="subTitle">
+                {{i18n.trans('FP_PREVIEW_FEATURE_SUBTITLE_ACC_ATT')}}
+            </div>
+            <div class="content" *ngIf="feature.accumulator && feature.accumulator.target">
+                {{feature.accumulator.target}}
+            </div>
+        </div>
+    </div>
+    <div class='cfx'></div>
+    <div class='block' *ngIf="featureType=='velocity'">
+        <div class="subTitle">
+            {{i18n.trans('FP_PREVIEW_FEATURE_SUBTITLE_TIME_WINDOW')}}
+        </div>
+        <div class="content">
+            <div>
+                {{i18n.trans('TIME_WINDOW_LENGTH')}}: {{feature.getTimeWindowLengthStr(i18n)}}
+            </div>
+            <div>
+                {{i18n.trans('OFFSET_LENGTH')}}: {{feature.getOffsetLengthStr(i18n)}}
+            </div>
+        </div>
+
+    </div>
+
+    <div class='block' *ngIf="featureType!=='system' && feature.hasDependencies()">
+        <div class='subTitle'>
+            {{i18n.trans('FP_PREVIEW_FEATURE_DEPENDENCIES', feature.featureDependencies.features.length)}}
+        </div>
+        <div class='content'>
+            <ul>
+                <li *ngFor="let feature of feature.featureDependencies.features" (click)="editFeature(feature)">
+                    {{feature.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,33 @@
+<div class="validator-result-wrapper">
+    <div class='closeIcon'>
+        <i class="material-icons" (click)='closeme()'>
+            close
+        </i>
+    </div>
+    <div class="title">
+        {{i18n.trans("FP_DATA_VALIDATION_VIEW_ERRORS_TITLE")}}
+    </div>
+    <div class="subTitle">
+        <i class="material-icons">report_problem</i>
+        <span>
+            {{i18n.trans('FP_DATA_VALIDATION_ERROR_MSG', validateResults.validateResults.length)}}
+        </span>
+    </div>
+    <!-- <div class="reminder">
+        {{i18n.trans('FP_DATA_VALIDATION_ERROR_REMINDER')}}
+    </div> -->
+
+    <dv-table
+            *ngIf="config && data"
+            appId="version_selector_table"
+            [config]="config"
+            [data]="data"
+            (onSelectedRowChanged)="selectedRowChanged($event)"
+            ></dv-table>
+
+    <div class='btnController'>
+        <button mat-raised-button color="primary" class="dvBtnPrimary" (click)="closeme()">
+            {{ i18n.trans('OK')}}
+        </button>
+    </div>
+</div>

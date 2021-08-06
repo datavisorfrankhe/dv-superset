@@ -1,0 +1,72 @@
+@import "commons.scss";
+
+.selector-wrapper {
+    padding: 20px 50px 20px 40px;
+    position: relative;
+
+    .closeIcon {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+    }
+
+    .title {
+        font-size: 20px;
+        color: $NOIR_TITLE;
+    }
+
+    .subTitle {
+        font-size: 16px;
+        margin-top: 30px;
+    }
+
+    .subTitleReminder {
+        font-size: 14px;
+    }
+
+    .version_selector {
+        margin-top: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .version_detail_header {
+        height: 70px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        .actionButtons{
+            position: absolute;
+            right: 10px;
+            button{
+                margin-left: 10px;
+            }
+        }
+        .expander {
+            position: absolute;
+            right: -43px;
+            cursor: pointer;
+        }
+    }
+
+    .btnController {
+        margin-top: 30px;
+
+        .mat-button:last-child {
+            margin-left: 10px;
+        }
+    }
+
+    .details {
+        border-bottom: solid 2px $NOIR017;
+        padding-bottom: 20px;
+    }
+
+    .version_detail_content {
+        overflow-y: auto;
+        height: 370px;
+        overflow-x: hidden;
+    }
+}

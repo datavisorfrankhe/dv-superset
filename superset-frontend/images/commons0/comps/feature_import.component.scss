@@ -1,0 +1,11 @@
+@import 'commons';
+
+mat-spinner{
+    margin-right: 10px;
+}
+:host ::ng-deep {
+    .mat-progress-spinner circle,
+    .mat-spinner circle {
+        stroke: white;
+    }
+}

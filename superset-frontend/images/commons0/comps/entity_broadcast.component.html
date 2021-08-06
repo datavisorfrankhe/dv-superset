@@ -1,0 +1,17 @@
+<span class='wrapper' *ngIf="enabled">
+    <button
+        *ngIf="items.length>0 && currentStatus!=='RUNNING' "
+        mat-button
+        class="basicButtonWithBorder"
+        type="button"
+        (click)="start()"
+    >
+        <i class="material-icons">share</i>
+        {{currentStatus===STATUSES.WAITING?i18n.trans('FP_BROADCAST_ENTITIES'):i18n.trans('FP_BROADCAST_ENTITIES_COMPLETED', total)}}
+    </button>
+    <div class='divProgress' *ngIf="currentStatus==='RUNNING'">
+        <span class='finishedSpan' [ngStyle]="{'width':  processed/total*100 +'%' }"></span>
+</div>
+<span class='content' *ngIf="currentStatus==='RUNNING'">{{ i18n.trans('FP_BROADCAST_ENTITIES_PREOGRESS', [processed, total])}}</span>
+
+</span>

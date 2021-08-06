@@ -1,0 +1,19 @@
+<div class="title-row">
+    <div class="title">
+        {{ type === _ALERT_TYPE.ERROR ? i18n.trans('FP_REPLAY_ERRORS') : i18n.trans('FP_REPLAY_WARNINGS')}}
+    </div>
+    <div class='closeIcon'>
+        <i class="material-icons" (click)='close()'>close</i>
+    </div>
+</div>
+<mat-divider></mat-divider>
+<!--<button class="contact-button" mat-button (click)="contact()">
+    {{i18n.trans('CONTACT')}}
+</button>-->
+<dv-table appId='sidenav_errors_table'
+   *ngIf="tableData && tableConfig"
+   [config]="tableConfig"
+   [data]="tableData"
+></dv-table>
+
+<button class="back-button" mat-raised-button (click)="close()">{{i18n.trans('BACK')}}</button>

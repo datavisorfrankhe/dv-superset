@@ -1,0 +1,7 @@
+<div class='validateResult' *ngIf="validateResults && validateResults.validateResults.length>0">
+    <i class="material-icons">report_problem</i>
+    <span class='contents'>
+        {{i18n.trans('FP_DATA_VALIDATION_ERROR_MSG', validateResults.validateResults.length)}}
+    </span>
+    <button mat-button class="basicPrimaryButton" type="button" (click)="showErrors()">{{i18n.trans('FP_DATA_VALIDATION_VIEW_ERRORS')}}</button>
+</div>

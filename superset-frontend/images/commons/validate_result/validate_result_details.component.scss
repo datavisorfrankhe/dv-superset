@@ -1,0 +1,48 @@
+@import "commons.scss";
+.validator-result-wrapper{
+    padding: 20px;
+    position: relative;
+    height: 100%;
+
+    .closeIcon {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+    }
+
+    .title {
+        font-size: 20px;
+        color: $NOIR_TITLE;
+    }
+    .subTitle{
+        display: flex;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        i {
+            color: $Y005;
+        }
+        span{
+            margin-top: 3px;
+            margin-left: 16px;
+        }
+    }
+    .subTitleReminder{
+        font-size: 14px;
+    }
+    .version_selector {
+        margin-top: 20px;
+        overflow: hidden;
+    }
+    .btnController{
+        margin-top: 30px;
+
+        .mat-button:last-child {
+            margin-left: 10px;
+        }
+    }
+    .details{
+        border-bottom: solid 2px $NOIR017;
+        padding-bottom: 20px;
+    }
+}

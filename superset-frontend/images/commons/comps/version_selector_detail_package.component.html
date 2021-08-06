@@ -1,0 +1,20 @@
+<div class='wrapper'>
+
+    <div class="stats">
+        <div class='item'  *ngIf="featureDefinitions">
+            <div class="count">{{featureDefinitions.featureDefinitions.length}}</div>
+            <div class="contents">{{i18n.trans('FP_VERSION_PACKAGE_FEATURETEMPLATES')}}</div>
+        </div>
+        <div class='item'  *ngIf="features">
+            <div class="count">{{features.features.length}}</div>
+            <div class="contents">{{i18n.trans('FP_VERSION_PACKAGE_GENERATED_FEATURES')}}</div>
+        </div>
+    </div>
+
+    <div class="templateWrapper" *ngIf="featureDefinitions && config!=null && data!=null">
+        <dv-table [appId]="appId" [config]="config" [data]="data">
+        </dv-table>
+    </div>
+
+
+</div>
