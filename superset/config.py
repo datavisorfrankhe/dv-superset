@@ -194,7 +194,7 @@ SQLALCHEMY_ENCRYPTED_FIELD_TYPE_ADAPTER = SQLAlchemyUtilsAdapter
 QUERY_SEARCH_LIMIT = 1000
 
 # Flask-WTF flag for CSRF
-WTF_CSRF_ENABLED = True
+WTF_CSRF_ENABLED = False
 
 # Add endpoints that need to be exempt from CSRF protection
 WTF_CSRF_EXEMPT_LIST = ["superset.views.core.log", "superset.charts.api.data"]
@@ -724,7 +724,7 @@ CELERY_CONFIG = CeleryConfig  # pylint: disable=invalid-name
 # override anything set within the app
 DEFAULT_HTTP_HEADERS: Dict[str, Any] = {}
 OVERRIDE_HTTP_HEADERS: Dict[str, Any] = {}
-HTTP_HEADERS: Dict[str, Any] = {}
+HTTP_HEADERS: Dict[str, Any] = {'X-Frame-Options': 'Allow'}
 
 # The db id here results in selecting this one as a default in SQL Lab
 DEFAULT_DB_ID = None
@@ -1116,7 +1116,7 @@ TALISMAN_ENABLED = False
 # If you want Talisman, how do you want it configured??
 TALISMAN_CONFIG = {
     "content_security_policy": None,
-    "force_https": True,
+    "force_https": False,
     "force_https_permanent": False,
 }
 
@@ -1137,9 +1137,9 @@ RLS_FORM_QUERY_REL_FIELDS: Optional[Dict[str, List[List[Any]]]] = None
 # See https://flask.palletsprojects.com/en/1.1.x/security/#set-cookie-options
 # for details
 #
-SESSION_COOKIE_HTTPONLY = True  # Prevent cookie from being read by frontend JS?
+SESSION_COOKIE_HTTPONLY = False  # Prevent cookie from being read by frontend JS?
 SESSION_COOKIE_SECURE = False  # Prevent cookie from being transmitted over non-tls?
-SESSION_COOKIE_SAMESITE = "Lax"  # One of [None, 'None', 'Lax', 'Strict']
+SESSION_COOKIE_SAMESITE = None  # One of [None, 'None', 'Lax', 'Strict']
 
 # Flask configuration variables
 SEND_FILE_MAX_AGE_DEFAULT = 60 * 60 * 24 * 365  # Cache static resources
